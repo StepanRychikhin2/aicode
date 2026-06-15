@@ -1,11 +1,31 @@
 import React from "react";
+import SplitText from "./SplitText";
 
 function Header() {
   return (
-    <header className="header">
-      <h1>Натуральний сир прямо з ферми</h1>
-      <p>Смак, який закохує з першого шматочка</p>
-      <a href="#about" className="cta">Дізнатися більше</a>
+    <header className="hero">
+      <div className="overlay">
+        <SplitText
+          tag="h1"
+          text="Смакуй сир сьогодні"
+          className="hero-title"
+          delay={80}
+          duration={0.6}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-100px"
+          textAlign="center"
+        />
+
+        <div className="hero-buttons">
+          <a href="#products" className="btn-modern">
+            Перейти до каталогу
+          </a>
+        </div>
+      </div>
     </header>
   );
 }
