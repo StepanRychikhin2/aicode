@@ -1,16 +1,14 @@
 {
   "files": {
     "main.css": "/aicode/static/css/main.71e34455.css",
-    "main.js": "/aicode/static/js/main.b52846fd.js",
-    "static/js/453.c0f1d5dc.chunk.js": "/aicode/static/js/453.c0f1d5dc.chunk.js",
+    "main.js": "/aicode/static/js/main.e483d64a.js",
     "static/media/heese-bg.jpg": "/aicode/static/media/heese-bg.46a656e49cdec9f72e42.jpg",
     "index.html": "/aicode/index.html",
     "main.71e34455.css.map": "/aicode/static/css/main.71e34455.css.map",
-    "main.b52846fd.js.map": "/aicode/static/js/main.b52846fd.js.map",
-    "453.c0f1d5dc.chunk.js.map": "/aicode/static/js/453.c0f1d5dc.chunk.js.map"
+    "main.e483d64a.js.map": "/aicode/static/js/main.e483d64a.js.map"
   },
   "entrypoints": [
     "static/css/main.71e34455.css",
-    "static/js/main.b52846fd.js"
+    "static/js/main.e483d64a.js"
   ]
 }
