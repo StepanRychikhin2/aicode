@@ -1,21 +1,34 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import Hero from './components/Hero'
-import InfoCards from './components/InfoCards'
-import Advantages from './components/Advantages'
-import CallToAction from './components/CallToAction'
-import Footer from './components/Footer'
 import Header from './components/Header'
 import './App.css'
+
+const InfoCards = lazy(() => import('./components/InfoCards'))
+const Advantages = lazy(() => import('./components/Advantages'))
+const CallToAction = lazy(() => import('./components/CallToAction'))
+const Footer = lazy(() => import('./components/Footer'))
+
+const LazySection = ({ children }) => (
+	<Suspense fallback={null}>{children}</Suspense>
+)
 
 function App() {
 	return (
 		<div className="App">
 			<Header />
 			<Hero />
-			<InfoCards />
-			<Advantages />
-			<CallToAction />
-			<Footer />
+			<LazySection>
+				<InfoCards />
+			</LazySection>
+			<LazySection>
+				<Advantages />
+			</LazySection>
+			<LazySection>
+				<CallToAction />
+			</LazySection>
+			<LazySection>
+				<Footer />
+			</LazySection>
 		</div>
 	)
 }

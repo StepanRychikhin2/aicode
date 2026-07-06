@@ -16,10 +16,12 @@ body {
 	height: 100vh;
 	background: url('./img/heese-bg.jpg') no-repeat center center;
 	background-size: cover;
+	background-color: #ffe0b3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
+	contain: layout paint;
 }
 
 .overlay {
