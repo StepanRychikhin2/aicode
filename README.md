@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# GC Cheese
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Адаптивний двомовний магазин крафтового сиру на Create React App. Мова й кошик зберігаються в `localStorage`; каталог працює за адресою `#/catalog`, сумісною з GitHub Pages.
 
-## Available Scripts
+## Запуск
 
-In the project directory, you can run:
+```bash
+npm install
+npm start
+```
 
-### `npm start`
+## Збірка й деплой
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm run build
+npm run deploy
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Скрипт `deploy` публікує папку `build` через `gh-pages`. Перед деплоєм перевірте `homepage` у `package.json`.
 
-### `npm test`
+## Візуали
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Higgsfield не прийняв генерацію через вимогу тарифу Basic або вище. Файли `public/images/*.svg` — локальні тимчасові векторні ілюстрації, щоб сайт виглядав завершено й працював без зовнішніх зображень. Замініть їх згенерованими кадрами, зберігши назви або оновивши шляхи в `src/data/products.js`. Спільний стиль для всіх промптів: «Преміальна реалістична food-фотографія для української крафтової сироварні GC Cheese; м’яке природне ранкове світло, ніжні вершкові, масляно-жовті й шавлієво-зелені тони, затишна фермерська атмосфера, чиста натуральна текстура, м’які тіні, без тексту, логотипів і облич, без спотворених форм». Спочатку згенеруйте hero, потім задайте його референсом стилю для решти:
 
-### `npm run build`
+- `hero.svg` → `hero.webp`, 16:9: «Головка ремісничого сиру та кілька акуратно відрізаних клинів на дубовому столі, маленька баночка меду, стиглі інжири, кремова лляна тканина; композиція для широкого hero-банера з вільним простором ліворуч для заголовка».
+- `gouda.svg` → `gouda.webp`, 1:1: «Кругла головка Гауди й невеликий клин, золотистий щільний сир із кількома природними дрібними вічками, зйомка під кутом 45°, на світлому кремовому тлі».
+- `brie.svg` → `brie.webp`, 1:1: «Круглий Брі з оксамитовою білою скоринкою та одним клином, видно ніжну вершкову серединку, під кутом 45°, на світлому кремовому тлі».
+- `parmesan.svg` → `parmesan.webp`, 1:1: «Шматок твердого витриманого сиру в стилі Пармезан і кілька ламаних стружок, зерниста золотава текстура, під кутом 45°, кремове тло».
+- `feta.svg` → `feta.webp`, 1:1: «Невеликі матові білі кубики Фети на простій керамічній тарілці, ніжна пориста текстура, мінімалістична предметна зйомка під кутом 45°, кремове тло».
+- `mozzarella.svg` → `mozzarella.webp`, 1:1: «Свіжа біла кулька Моцарели та один розламаний шматочок із м’якими волокнами, мінімалістична предметна зйомка під кутом 45°, кремове тло».
+- `ricotta.svg` → `ricotta.webp`, 1:1: «Невелика порція повітряної Рікоти з ніжною зернистою поверхнею у світлій керамічній мисці, під кутом 45°, кремове тло».
+- `cheddar.svg` → `cheddar.webp`, 1:1: «Бурштинова головка Чедера й чисто відрізаний трикутний клин із невеликими природними вічками, під кутом 45°, кремове тло».
+- `dorblu.svg` → `dorblu.webp`, 1:1: «Клин м’якого Дор Блю з виразними, але природними тонкими прожилками блакитної плісняви, під кутом 45°, кремове тло».
+- `camembert.svg` → `camembert.webp`, 1:1: «Невеликий круглий Камамбер із природною білою скоринкою, цілий сир і один розрізаний клин, під кутом 45°, кремове тло».
+- `smoked-braid.svg` → `smoked-braid.webp`, 1:1: «Ручна косичка зі світлого копченого сиру, акуратно заплетена, природні пасма й дуже легкий золотавий відтінок копчення, під кутом 45°, кремове тло».
+- `about.svg` → `about.webp`, 4:5: «Лише руки сировара ріжуть свіжий сирний згусток довгим ножем у чистій світлій сироварні; м’яке ранкове світло з вікна, жодних облич».
+- `restaurants.svg` → `restaurants.webp`, 4:5: «Лише руки шефа викладають страву з розплавленим сиром на світлій сучасній кухні; апетитна натуральна їжа, обличчя поза кадром».
+- `pattern.svg` → `pattern.png`: «Безшовний дуже низькоконтрастний кремовий патерн із ледь помітними сирними вічками та молочними краплями, рівномірний повторюваний тайл, без контурів із різким контрастом».
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Оптимізуйте фотографії у WebP перед додаванням: до ~400 КБ для hero й орієнтовно до ~200 КБ для кожного товару.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Додані фотографії
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Фото в папці `public/images` перейменовані на зрозумілі назви й підключені з урахуванням GitHub Pages (`PUBLIC_URL`). Користувацькі фото використані для hero, товарів і ресторанного блоку. Фото з Pexels позначене як безкоштовне для використання на сторінці джерела:
 
-### `npm run eject`
+- `about-photo.jpg` — [руки викладають сир на дошку, Pexels](https://www.pexels.com/photo/a-person-arranging-sliced-cheese-on-the-wooden-board-6660298/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Замовлення
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Форма викликає `submitOrder()` у `src/services/submitOrder.js`. Зараз він виводить запит у консоль і повертає успіх; підключіть там Telegram-бота чи поштовий сервіс перед прийманням реальних замовлень.
