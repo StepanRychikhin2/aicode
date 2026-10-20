@@ -1,0 +1,238 @@
+.eyebrow {
+  composes: eyebrow from "../../styles/primitives.module.css";
+}
+
+.button-accent {
+  composes: accent from "../../styles/primitives.module.css";
+}
+
+.button {
+  composes: button from "../../styles/primitives.module.css";
+}
+
+.order-section {
+  width: min(var(--content-width), calc(100% - var(--gutter) * 2));
+  margin: 0 auto 80px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 64px;
+  border-radius: 28px;
+  background: var(--surface-subtle);
+}
+
+.order-intro {
+  align-self: center;
+}
+
+.order-intro h2 {
+  font-size: clamp(36px, 4vw, 52px);
+  margin: 20px 0 24px;
+}
+
+.order-intro > p {
+  max-width: 38ch;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.accent-pill {
+  display: inline-flex;
+  padding: 8px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  font-size: 9px;
+}
+
+.order-doodle {
+  margin-top: 40px;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.order-doodle span {
+  font: italic 22px Georgia, serif;
+  color: var(--text-muted);
+}
+
+.order-form-wrap {
+  border: 1px solid var(--border);
+  padding: 32px;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.order-form-wrap form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.order-form-wrap label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.order-form-wrap input:not([type="radio"]), .order-form-wrap textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--surface);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.order-form-wrap input::placeholder, .order-form-wrap textarea::placeholder {
+  color: var(--text-soft);
+}
+
+.order-form-wrap textarea {
+  resize: vertical;
+}
+
+.order-form-wrap fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.order-form-wrap legend {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.order-form-wrap .radio-label {
+  flex-direction: row;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.radio-label:has(input:checked) {
+  border-color: var(--border-strong);
+  background: var(--surface-subtle);
+}
+
+.radio-label input {
+  accent-color: var(--focus);
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.form-submit {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.form-success {
+  padding: 48px 0;
+  text-align: center;
+  animation: success-enter var(--motion-enter) var(--motion-ease);
+}
+
+@keyframes success-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-success { animation: none; }
+}
+
+.success-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  color: var(--on-accent);
+  background: var(--accent);
+  font-size: 28px;
+}
+
+.form-success h3 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.success-sub {
+  margin-top: 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.form-error-banner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px;
+  border: 1px solid var(--danger);
+  border-radius: 12px;
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.error-text {
+  flex: 1;
+  min-width: 150px;
+  font-size: 13px;
+}
+
+.error-icon {
+  display: flex;
+}
+
+.retry-btn {
+  min-height: 44px;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+@media (max-width: 960px) {
+  .order-section {
+    gap: 32px;
+    padding: 32px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .order-section {
+    grid-template-columns: 1fr;
+    padding: 32px 20px 20px;
+    margin-bottom: 48px;
+  }
+  .order-form-wrap {
+    padding: 24px 20px;
+  }
+  .order-doodle {
+    display: none;
+  }
+}

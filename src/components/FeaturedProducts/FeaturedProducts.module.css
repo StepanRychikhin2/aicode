@@ -1,0 +1,28 @@
+.product-grid {
+  composes: grid from "../../styles/primitives.module.css";
+}
+
+.section {
+  composes: section from "../../styles/primitives.module.css";
+}
+
+.button-accent {
+  composes: accent from "../../styles/primitives.module.css";
+}
+
+.button {
+  composes: button from "../../styles/primitives.module.css";
+}
+
+.featured {
+  padding-top: 40px;
+}
+
+.featured-action-wrap {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.button-featured-more {
+  min-width: 220px;
+}

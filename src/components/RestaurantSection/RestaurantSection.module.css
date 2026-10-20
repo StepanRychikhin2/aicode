@@ -1,0 +1,91 @@
+.eyebrow {
+  composes: eyebrow from "../../styles/primitives.module.css";
+}
+
+.button-accent {
+  composes: accent from "../../styles/primitives.module.css";
+}
+
+.button {
+  composes: button from "../../styles/primitives.module.css";
+}
+
+.restaurant-section {
+  width: min(var(--content-width), calc(100% - var(--gutter) * 2));
+  margin: 0 auto 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--dark-surface);
+  color: var(--on-dark);
+}
+
+.restaurant-copy {
+  padding: clamp(32px, 5vw, 72px);
+}
+
+.accent-eyebrow {
+  color: var(--accent);
+}
+
+.restaurant-copy h2 {
+  font-size: clamp(36px, 4vw, 52px);
+  margin-bottom: 24px;
+}
+
+.restaurant-copy > p {
+  color: var(--on-dark-muted);
+  margin-bottom: 32px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.restaurant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.restaurant-chip {
+  padding-top: 12px;
+  border-top: 1px solid rgb(255 255 255 / 20%);
+  color: var(--on-dark-muted);
+  font-size: 12px;
+}
+
+.restaurant-image {
+  position: relative;
+  min-height: 460px;
+}
+
+.restaurant-image img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+}
+
+.image-label {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--on-photo);
+  text-shadow: 0 2px 16px rgb(0 0 0 / 60%);
+}
+
+@media (max-width: 800px) {
+  .restaurant-section {
+    grid-template-columns: 1fr;
+  }
+  .restaurant-copy {
+    padding: 40px 24px;
+  }
+  .restaurant-image {
+    min-height: 320px;
+  }
+}

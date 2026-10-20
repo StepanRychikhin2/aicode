@@ -1,6 +1,8 @@
+import styles from './ThemeToggle.module.css'
+
 import React from 'react'
-import { useTheme } from '../context/ThemeContext'
-import { useLang } from '../i18n/LanguageContext'
+import { useTheme } from '../../context/ThemeContext'
+import { useLang } from '../../i18n/LanguageContext'
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
@@ -18,12 +20,13 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
-      className="theme-toggle"
+      className={styles['theme-toggle']}
       onClick={toggleTheme}
+      aria-pressed={isDark}
       aria-label={label}
       title={label}
     >
-      <span className="theme-toggle-icon" aria-hidden="true">
+      <span className={styles['theme-toggle-icon']} aria-hidden="true">
         {isDark ? (
           // Moon icon
           <svg
@@ -58,4 +61,3 @@ export default function ThemeToggle() {
     </button>
   )
 }
-

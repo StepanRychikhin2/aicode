@@ -14,6 +14,7 @@ export function CartProvider({ children }) {
 		}
 	})
 	const [toast, setToast] = useState('')
+	const [addition, setAddition] = useState(null)
 	const update = (next) => {
 		setItems(next)
 		localStorage.setItem('gc-cheese-cart', JSON.stringify(next))
@@ -30,6 +31,7 @@ export function CartProvider({ children }) {
 				: [...items, { ...product, quantity }],
 		)
 		setToast('added')
+		setAddition(previous => ({ productId: product.id, sequence: (previous?.sequence || 0) + 1 }))
 	}
 	const remove = (id) => update(items.filter((item) => item.id !== id))
 	const setQuantity = (id, quantity) =>
@@ -44,6 +46,7 @@ export function CartProvider({ children }) {
 		remove,
 		setQuantity,
 		toast,
+		addition,
 		setToast,
 		count: items.reduce((sum, item) => sum + item.quantity, 0),
 		total: items.reduce((sum, item) => sum + item.price * item.quantity, 0),

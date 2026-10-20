@@ -1,0 +1,114 @@
+.eyebrow {
+  composes: eyebrow from "../../styles/primitives.module.css";
+}
+
+.story-section {
+  width: min(var(--content-width), calc(100% - var(--gutter) * 2));
+  margin: 16px auto 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface-subtle);
+}
+
+.story-image {
+  position: relative;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.photo-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--surface-subtle);
+  transform: scaleY(0);
+  transform-origin: center bottom;
+}
+
+.story-image img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+}
+
+.image-stamp {
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 2;
+  bottom: 24px;
+  left: 24px;
+  width: 100px;
+  height: 100px;
+  border: 1px solid var(--on-photo);
+  color: var(--on-photo);
+  background: var(--photo-overlay);
+  border-radius: 50%;
+  font-size: 9px;
+  letter-spacing: .14em;
+  line-height: 1.8;
+  transform: rotate(-12deg);
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .story-image img {
+    top: -6%;
+    height: 112%;
+  }
+}
+
+.story-copy {
+  padding: clamp(32px, 5vw, 72px);
+  align-self: center;
+}
+
+.story-copy h2 {
+  font-size: clamp(36px, 4vw, 52px);
+  margin-bottom: 24px;
+}
+
+.story-copy p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.underlined-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  min-height: 48px;
+  margin-top: 24px;
+  border-bottom: 1px solid var(--text-main);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.handwritten {
+  margin-top: 36px;
+  font: italic 23px/1.25 Georgia, serif;
+  color: var(--text-muted);
+}
+
+.handwritten span {
+  color: var(--text-main);
+}
+
+@media (max-width: 800px) {
+  .story-section {
+    grid-template-columns: 1fr;
+    margin-bottom: 48px;
+  }
+  .story-image {
+    min-height: 340px;
+  }
+  .story-copy {
+    padding: 32px 24px;
+  }
+}

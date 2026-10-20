@@ -1,0 +1,241 @@
+.empty-desc {
+  composes: emptyText from "../../styles/primitives.module.css";
+}
+
+.sr-only {
+  composes: srOnly from "../../styles/primitives.module.css";
+}
+
+.product-grid {
+  composes: grid from "../../styles/primitives.module.css";
+}
+
+.eyebrow {
+  composes: eyebrow from "../../styles/primitives.module.css";
+}
+
+.button-accent {
+  composes: accent from "../../styles/primitives.module.css";
+}
+
+.button {
+  composes: button from "../../styles/primitives.module.css";
+}
+
+.catalog-page {
+  padding-bottom: 80px;
+}
+
+.catalog-intro {
+  position: relative;
+  text-align: center;
+  padding: 64px var(--gutter) 40px;
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--border);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  min-height: 44px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.back-link:hover {
+  color: var(--text-main);
+  text-decoration: underline;
+}
+
+.catalog-intro h1 {
+  font-size: clamp(44px, 5vw, 72px);
+}
+
+.catalog-intro > p {
+  max-width: 52ch;
+  margin: 24px auto 0;
+  color: var(--text-muted);
+}
+
+.filter-chips-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.filter-chip {
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  background: var(--surface);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background var(--motion-fast), color var(--motion-fast), border-color var(--motion-fast), transform 180ms var(--motion-ease);
+}
+
+.filter-chip:hover {
+  background: var(--surface-subtle);
+}
+
+.filter-chip.active {
+  background: var(--accent);
+  border-color: var(--on-accent);
+  color: var(--on-accent);
+}
+
+.filter-chip:active { transform: scale(.97); }
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .filter-chip:hover:not(:active) { transform: translateY(-2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filter-chip:active { transform: none; }
+}
+
+.catalog-content {
+  width: min(var(--content-width), calc(100% - var(--gutter) * 2));
+  margin: 40px auto 0;
+}
+
+.catalog-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.search-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  width: min(100%, 480px);
+  padding: 0 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  background: var(--surface);
+}
+
+.search-control:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.search-control input {
+  width: 100%;
+  min-width: 0;
+  height: 52px;
+  background: none;
+  border: 0;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-control input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-control input::placeholder {
+  color: var(--text-soft);
+}
+
+.search-icon {
+  display: inline-flex;
+  color: var(--text-muted);
+}
+
+.clear-search-btn {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+}
+
+.select-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.select-control select {
+  min-height: 52px;
+  max-width: 240px;
+  padding: 12px 36px 12px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  background: var(--surface);
+  color: var(--text-main);
+}
+
+.catalog-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  margin-bottom: 8px;
+}
+
+.result-count {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.reset-text-btn {
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 12px;
+}
+
+.empty-catalog-state {
+  text-align: center;
+  padding: 64px 24px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.empty-icon-bubble {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--surface-subtle);
+  margin: 0 auto 24px;
+}
+
+.empty-catalog-state h3 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+@media (max-width: 680px) {
+  .catalog-intro {
+    padding-block: 24px 32px;
+  }
+  .catalog-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .search-control {
+    width: 100%;
+  }
+  .select-control {
+    justify-content: space-between;
+  }
+  .filter-chip {
+    padding-inline: 16px;
+  }
+}

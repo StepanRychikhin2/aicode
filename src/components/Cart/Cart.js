@@ -1,40 +1,39 @@
-import React, { useEffect } from 'react'
-import { useLang } from '../i18n/LanguageContext'
-import { useCart } from '../context/CartContext'
+import Icon from '../Icon/Icon'
+import styles from './Cart.module.css'
+
+import React from 'react'
+import { useDialog } from '../../hooks/useDialog'
+import { useLang } from '../../i18n/LanguageContext'
+import { useCart } from '../../context/CartContext'
 
 export default function Cart({ open, onClose, onCheckout }) {
   const { lang, t } = useLang()
   const { items, remove, setQuantity, total } = useCart()
 
-  useEffect(() => {
-    if (!open) return
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [open, onClose])
+  const dialogRef = useDialog(open, onClose)
 
   if (!open) return null
 
   return (
-    <div className="drawer-backdrop" onClick={onClose} role="presentation">
+    <div className={styles['drawer-backdrop']} onClick={onClose} role="presentation">
       <aside
-        className="cart-drawer glass-panel"
+        ref={dialogRef}
+        tabIndex={-1}
+        className={styles['cart-drawer']}
         role="dialog"
         aria-modal="true"
         aria-labelledby="cart-title"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="drawer-heading">
-          <div className="drawer-title-group">
+        <div className={styles['drawer-heading']}>
+          <div className={styles['drawer-title-group']}>
             <h2 id="cart-title">{t.cart}</h2>
             {items.length > 0 && (
-              <span className="cart-badge">{items.reduce((s, i) => s + i.quantity, 0)}</span>
+              <span className={styles['cart-badge']}>{items.reduce((s, i) => s + i.quantity, 0)}</span>
             )}
           </div>
           <button
-            className="icon-button close-btn"
+            className={styles['icon-button']}
             onClick={onClose}
             aria-label={t.close}
           >
@@ -44,22 +43,22 @@ export default function Cart({ open, onClose, onCheckout }) {
 
         {items.length > 0 ? (
           <>
-            <div className="cart-items">
+            <div className={styles['cart-items']}>
               {items.map((item) => (
-                <div className="cart-item glass-item" key={item.id}>
+                <div className={styles['cart-item']} key={item.id}>
                   <img
                     src={item.image}
                     alt={item.name[lang]}
-                    className="cart-item-image"
+                    className={styles['cart-item-image']}
                     loading="lazy"
                   />
-                  <div className="cart-item-main">
-                    <b className="cart-item-title">{item.name[lang]}</b>
-                    <span className="cart-item-price">{item.price} ₴</span>
-                    <div className="quantity-stepper">
+                  <div className={styles['cart-item-main']}>
+                    <b className={styles['cart-item-title']}>{item.name[lang]}</b>
+                    <span className={styles['cart-item-price']}>{item.price} ₴</span>
+                    <div className={styles['quantity-stepper']}>
                       <button
                         type="button"
-                        className="stepper-btn"
+                        className={styles['stepper-btn']}
                         onClick={() => setQuantity(item.id, item.quantity - 1)}
                         aria-label={
                           lang === 'ua'
@@ -69,10 +68,10 @@ export default function Cart({ open, onClose, onCheckout }) {
                       >
                         −
                       </button>
-                      <span className="stepper-value">{item.quantity}</span>
+                      <span className={styles['stepper-value']}>{item.quantity}</span>
                       <button
                         type="button"
-                        className="stepper-btn"
+                        className={styles['stepper-btn']}
                         onClick={() => setQuantity(item.id, item.quantity + 1)}
                         aria-label={
                           lang === 'ua'
@@ -86,7 +85,7 @@ export default function Cart({ open, onClose, onCheckout }) {
                   </div>
                   <button
                     type="button"
-                    className="remove-button"
+                    className={styles['remove-button']}
                     onClick={() => remove(item.id)}
                     aria-label={`${t.remove} ${item.name[lang]}`}
                   >
@@ -96,34 +95,34 @@ export default function Cart({ open, onClose, onCheckout }) {
               ))}
             </div>
 
-            <div className="cart-footer">
-              <div className="cart-total-row">
-                <span className="cart-total-label">{t.total}</span>
-                <strong className="cart-total-amount">{total} ₴</strong>
+            <div className={styles['cart-footer']}>
+              <div className={styles['cart-total-row']}>
+                <span className={styles['cart-total-label']}>{t.total}</span>
+                <strong className={styles['cart-total-amount']}>{total} ₴</strong>
               </div>
-              <p className="cart-shipping-note">
-                ⚡ {t.fastDelivery}
+              <p className={styles['cart-shipping-note']}>
+                <Icon name="truck" size={18} /> {t.fastDelivery}
               </p>
               <button
                 type="button"
-                className="button button-accent cart-checkout-btn"
+                className={styles['button'] + ' ' + styles['button-accent'] + ' ' + styles['cart-checkout-btn']}
                 onClick={onCheckout}
               >
                 <span>{t.checkout}</span>
-                <span aria-hidden="true" className="btn-arrow">↗</span>
+                <span aria-hidden="true">↗</span>
               </button>
             </div>
           </>
         ) : (
-          <div className="empty-cart-state">
-            <div className="empty-icon-wrap" aria-hidden="true">
-              <span className="empty-emoji">🧀</span>
+          <div className={styles['empty-cart-state']}>
+            <div className={styles['empty-icon-wrap']} aria-hidden="true">
+              <span className={styles['empty-emoji']}><Icon name="cheese" size={40} /></span>
             </div>
             <h3>{t.emptyCart}</h3>
-            <p className="empty-desc">{t.emptyCartSubtitle}</p>
+            <p className={styles['empty-desc']}>{t.emptyCartSubtitle}</p>
             <button
               type="button"
-              className="button button-accent button-empty-action"
+              className={styles['button'] + ' ' + styles['button-accent']}
               onClick={() => {
                 onClose()
                 if (window.location.hash !== '#/catalog') {

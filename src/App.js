@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import Header from './components/Header'
-import Cart from './components/Cart'
-import { Footer, HomePage, CatalogPage, ProductModal } from './components/Storefront'
+import Header from './components/Header/Header'
+import Cart from './components/Cart/Cart'
+import Footer from './components/Footer/Footer'
+import HomePage from './components/HomePage/HomePage'
+import CatalogPage from './components/CatalogPage/CatalogPage'
+import ProductModal from './components/ProductModal/ProductModal'
 import { LanguageProvider, useLang } from './i18n/LanguageContext'
 import { CartProvider, useCart } from './context/CartContext'
 import { ThemeProvider } from './context/ThemeContext'
 import './styles/global.css'
+import styles from './App.module.css'
 
 const getScrollBehavior = () =>
   typeof window !== 'undefined' &&
@@ -16,7 +20,7 @@ const getScrollBehavior = () =>
 
 function Store() {
   const { lang } = useLang()
-  const { toast, setToast } = useCart()
+  const { toast, setToast, addition } = useCart()
   const [route, setRoute] = useState(() =>
     window.location.hash.startsWith('#/catalog') ? 'catalog' : 'home'
   )
@@ -26,33 +30,14 @@ function Store() {
   useEffect(() => {
     const handleRoute = () => {
       if (window.location.hash.startsWith('#/')) {
+        // Set the route's starting position before its layout effects measure it.
+        window.scrollTo({ top: 0, behavior: 'auto' })
         setRoute(window.location.hash.startsWith('#/catalog') ? 'catalog' : 'home')
-        window.scrollTo({ top: 0, behavior: getScrollBehavior() })
       }
     }
     window.addEventListener('hashchange', handleRoute)
     return () => window.removeEventListener('hashchange', handleRoute)
   }, [])
-
-  useEffect(() => {
-    const nodes = document.querySelectorAll('.reveal')
-    if (!('IntersectionObserver' in window)) {
-      nodes.forEach((node) => node.classList.add('reveal-visible'))
-      return undefined
-    }
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-visible')
-            observer.unobserve(entry.target)
-          }
-        }),
-      { threshold: 0.12 }
-    )
-    nodes.forEach((node) => observer.observe(node))
-    return () => observer.disconnect()
-  }, [route])
 
   useEffect(() => {
     document.title =
@@ -72,16 +57,17 @@ function Store() {
 
   useEffect(() => {
     if (!toast) return undefined
-    const timer = window.setTimeout(() => setToast(''), 2400)
+    const timer = window.setTimeout(() => setToast(''), 3000)
     return () => window.clearTimeout(timer)
-  }, [toast, setToast])
+  }, [toast, setToast, addition?.sequence])
 
   const navigate = (page, section) => {
     setCartOpen(false)
     setSelectedProduct(null)
-    setRoute(page)
     const hash = page === 'catalog' ? '#/catalog' : '#/'
     const pageChanged = route !== page
+    if (pageChanged) window.scrollTo({ top: 0, behavior: 'auto' })
+    setRoute(page)
     if (window.location.hash !== hash) window.location.hash = hash
     if (section) {
       window.setTimeout(
@@ -112,13 +98,9 @@ function Store() {
 
   return (
     <>
-      <div className="ambient-background" aria-hidden="true">
-        <div className="ambient-blob blob-1" />
-        <div className="ambient-blob blob-2" />
-        <div className="ambient-blob blob-3" />
-      </div>
+      <a className={styles['skip-link']} href="#main-content">{lang === 'ua' ? 'Перейти до вмісту' : 'Skip to content'}</a>
 
-      <Header onCart={() => setCartOpen(true)} onNavigate={navigate} />
+      <Header route={route} onCart={() => setCartOpen(true)} onNavigate={navigate} />
 
       {route === 'catalog' ? (
         <CatalogPage onProduct={setSelectedProduct} />
@@ -135,19 +117,20 @@ function Store() {
       />
 
       <ProductModal
+        key={selectedProduct?.id || 'closed'}
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
       />
 
       {toast && (
-        <div className="toast" role="status">
-          <span className="toast-check">✓</span>
+        <div key={addition?.sequence} className={styles['toast']} role="status" aria-atomic="true">
+          <span className={styles['toast-check']}>✓</span>
           <span>{lang === 'ua' ? 'Додано до кошика' : 'Added to your basket'}</span>
         </div>
       )}
 
       <a
-        className="scroll-top"
+        className={styles['scroll-top']}
         href="#top"
         aria-label={lang === 'ua' ? 'На початок сторінки' : 'Back to top'}
         onClick={(event) => {

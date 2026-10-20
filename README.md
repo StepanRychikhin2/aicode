@@ -2,6 +2,40 @@
 
 Адаптивний двомовний магазин крафтового сиру на Create React App. Мова й кошик зберігаються в `localStorage`; каталог працює за адресою `#/catalog`, сумісною з GitHub Pages.
 
+## Компоненти та стилі
+
+Кожен компонент має власну папку й локальний CSS Module:
+
+```text
+src/
+  components/
+    Header/
+      Header.js
+      Header.module.css
+    ProductCard/
+      ProductCard.js
+      ProductCard.module.css
+    CatalogPage/
+      CatalogPage.js
+      CatalogPage.module.css
+    ...
+  styles/
+    global.css
+    primitives.module.css
+  App.js
+  App.module.css
+```
+
+`global.css` містить лише скидання базових стилів, типографіку HTML-елементів і змінні світлої/темної тем. `primitives.module.css` задає спільні кнопки, сітки та інші базові елементи; компоненти підключають їх через `composes` у власних модулях. Стилі секцій, каталогу, кошика та форми редагуються безпосередньо біля відповідних компонентів.
+
+Головна сторінка складається з окремих секцій: `Hero`, `Advantages`, `FeaturedProducts`, `AboutSection`, `RestaurantSection`, `Reviews`, `OrderSteps` та `OrderForm`. Спільний `useDialog` керує фокусом, Escape і блокуванням прокручування для кошика та вікна товару.
+
+## Анімації
+
+GSAP і ScrollTrigger керують послідовною появою першого екрана, одноразовими появами секцій і карток та делікатним паралаксом фотографії «Про нас» на комп’ютері. На телефоні рух зменшений; `prefers-reduced-motion` вимикає декоративні ефекти. Усі стилі ефектів належать відповідним CSS Modules.
+
+Параметри руху, очищення в React і результати перевірки продуктивності описані в [docs/MOTION.md](docs/MOTION.md).
+
 ## Запуск
 
 ```bash

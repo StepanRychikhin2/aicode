@@ -1,0 +1,66 @@
+.section {
+  composes: section from "../../styles/primitives.module.css";
+}
+
+.how-order {
+  padding-top: 16px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.step {
+  position: relative;
+  text-align: center;
+  padding: 16px;
+}
+
+.step-number {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 24px;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--surface-subtle);
+  font-family: var(--font-heading);
+  font-size: 20px;
+}
+
+.step h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.step p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.step-connector {
+  position: absolute;
+  right: -32px;
+  top: 24px;
+  color: var(--text-soft);
+  font-size: 28px;
+}
+
+@media (max-width: 680px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .step {
+    padding: 0 16px;
+  }
+  .step-connector {
+    display: none;
+  }
+  .step-number {
+    margin-bottom: 16px;
+  }
+}

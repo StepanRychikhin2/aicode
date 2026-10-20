@@ -1,0 +1,74 @@
+.section {
+  composes: section from "../../styles/primitives.module.css";
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.stars {
+  color: var(--text-main);
+  font-size: 16px;
+  letter-spacing: 4px;
+}
+
+.review-card blockquote {
+  margin: 24px 0 32px;
+  color: var(--text-main);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.review-card figcaption {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.review-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--surface-subtle);
+  font-family: var(--font-heading);
+  font-size: 18px;
+}
+
+.review-card b {
+  display: block;
+  font-size: 13px;
+}
+
+.review-card small {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+  .review-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .review-card {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,25 @@
+.eyebrow {
+  composes: eyebrow from "../../styles/primitives.module.css";
+}
+
+.section-title {
+  max-width: 650px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.section-title h2 {
+  font-size: clamp(32px, 3.5vw, 48px);
+}
+
+.section-title p {
+  margin: 20px auto 0;
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+
+@media (max-width: 540px) {
+  .section-title {
+    margin-bottom: 28px;
+  }
+}
